@@ -17,6 +17,7 @@ const app = express();
 
 app.listen(8080);
 
+app.use("/", express.static(path.join(__dirname,"dist/movieAng")));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
