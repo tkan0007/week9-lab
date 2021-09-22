@@ -55,8 +55,9 @@ export class ActorComponent implements OnInit {
       result =>{
         console.log("OK");
         this.onGetActors();
-      },error =>{
-        console.log("Error");
+      },(err) =>{
+        console.log("Error:");
+        console.error();
       },()=>{
         console.log("Complete!");
       }

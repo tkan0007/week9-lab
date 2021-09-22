@@ -111,6 +111,32 @@ module.exports = {
             res.json();
         });
     },
+
+
+    /* Delete by title */
+    deleteByTitle: function (req, res) {
+        Movie.findOneAndRemove({ title: req.params.title }, function (err) {
+            if (err) return res.status(400).json(err);
+
+            res.json();
+        });
+    },
+
+    deleteByDuration: function (req, res) {
+
+        let sYear = req.params.from;
+        let eYear = req.params.to;
+
+        if(req.body.from > req.body.to){
+            sYear = req.params.to;
+            eYear = req.params.from;
+        }
+
+        Movie.deleteMany({year:{$gte:sYear,$lte:eYear}}, function (err) {
+            if (err) return res.status(400).json(err);
+            res.json();
+        });
+    },
 };
 
 function remover(arr,str){

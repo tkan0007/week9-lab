@@ -4,10 +4,6 @@ const express = require("express");
 const morgan = require("morgan");
 const ejs = require("ejs");
 
-//models <--  No need?
-//const Actor = require('./models/actor');
-//const Movie = require('./models/movie');
-
 //router
 const actors = require('./routers/actor');
 const movies = require('./routers/movie');
@@ -35,6 +31,10 @@ mongoose.connect('mongodb://localhost:27017/movies', function (err) {
 
 // For week 9
 app.delete('/actors/:id',actors.deleteOne);
+
+// For week 9 lab task
+app.delete('/movies/:title', movies.deleteByTitle)
+app.delete('/movies/delDuration/:from/:to', movies.deleteByDuration)
 
 // Configuration Endpoints
 
