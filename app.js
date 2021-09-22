@@ -33,9 +33,12 @@ mongoose.connect('mongodb://localhost:27017/movies', function (err) {
 });
 
 
-//Configuration Endpoints
+// For week 9
+app.delete('/actors/:id',actors.deleteOne);
 
-//Actor RESTFul  endpoints
+// Configuration Endpoints
+
+// Actor RESTFul  endpoints
 app.get('/actors', actors.getAll); // lab task 7
 app.post('/actors', actors.createOne);
 app.put('/actors/addBoYActor', actors.addBoYActor); // extra task

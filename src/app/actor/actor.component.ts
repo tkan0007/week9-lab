@@ -32,14 +32,14 @@ export class ActorComponent implements OnInit {
   }
 
   onGetActors(){
-    this.dbService.getActors().subscribe((data:any) =>{ // why not any[]?
+    this.dbService.getActors().subscribe((data:any) =>{
       this.actorsDB = data;
     });
   }
 
   onSaveActor() {
     let obj = { name: this.fullName, bYear: this.bYear };
-    this.dbService.createActor(obj).subscribe(result => {
+    this.dbService.createActor(obj).subscribe((data:any) => {
       this.onGetActors();
     });
   }
@@ -51,13 +51,21 @@ export class ActorComponent implements OnInit {
   }
   onUpdateActor() {
     let obj = { name: this.fullName, bYear: this.bYear };
-    this.dbService.updateActor(this.actorId, obj).subscribe((data:any)=>{
-      this.onGetActors;
-    })
+    this.dbService.updateActor(this.actorId, obj).subscribe(
+      result =>{
+        console.log("OK");
+        this.onGetActors();
+      },error =>{
+        console.log("Error");
+      },()=>{
+        console.log("Complete!");
+      }
+
+    )
   }
 
   onDeleteActor(item:any) {
-    this.dbService.deleteActor(item._id).subscribe(result => {
+    this.dbService.deleteActor(item._id).subscribe((data:any) => {
       this.onGetActors();
     });
   }
