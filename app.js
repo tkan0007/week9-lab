@@ -4,6 +4,7 @@ const express = require("express");
 const morgan = require("morgan");
 const ejs = require("ejs");
 
+
 //router
 const actors = require('./routers/actor');
 const movies = require('./routers/movie');
@@ -35,6 +36,8 @@ app.delete('/actors/:id',actors.deleteOne);
 // For week 9 lab task
 app.delete('/movies/:title', movies.deleteByTitle)
 app.delete('/movies/delDuration/:from/:to', movies.deleteByDuration)
+app.get('/movies/:id', movies.getOne);
+app.put('/movies/addActorMovie/:movieId/:actorId', movies.addActorMovie)
 
 // Configuration Endpoints
 

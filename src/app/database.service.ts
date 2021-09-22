@@ -40,12 +40,17 @@ export class DatabaseService {
     let url = "/movies/" + id;
     return this.http.get(url);
   }
+
   createMovie(data:object) {
     return this.http.post("/movies", data, httpOptions);
   }
   updateMovie(id: string, data:any) {
     let url = "/movies/" + id;
     return this.http.put(url, data, httpOptions);
+  }
+  addActorMovie(movieId:string, actorId:string){
+    let url = "movies/addActorMovie/"+movieId+"/"+actorId;
+    return this.http.put(url,httpOptions);
   }
   deleteMovie(title: string) {
     let url = "/movies/" + title;

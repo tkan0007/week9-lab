@@ -37,6 +37,25 @@ module.exports = {
             res.json(movie);
         });
     },
+    addActorMovie: function (req, res) {
+        Movie.findOne({ _id: req.params.movieId }, function (err, movie) {
+            if (err) return res.status(400).json(err);
+            if (!movie) return res.status(404).json();
+
+            Actor.findOne({ _id: req.params.actorId }, function (err, actor) {
+                if (err) return res.status(400).json(err);
+                if (!actor) return res.status(404).json();
+
+                movie.actors.push(actor._id);
+                movie.save(function (err) {
+                    if (err) return res.status(500).json(err);
+                    res.json(movie);
+                });
+            })
+        });
+    },
+
+
 
     /* lab task 1 */
     deleteOne: function (req, res) {
@@ -78,7 +97,6 @@ module.exports = {
                 movie.actors.push(actor._id);
                 movie.save(function (err) {
                     if (err) return res.status(500).json(err);
-
                     res.json(movie);
                 });
             })
