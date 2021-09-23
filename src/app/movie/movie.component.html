@@ -150,14 +150,14 @@
               <th>Title</th>
               <th>Year</th>
               <th>Select!</th>
-              <th>Actors</th>
             </tr>
+            <tbody>
             <tr *ngFor="let item of moviesDB">
               <td>{{item.title}}</td>
               <td>{{item.year}}</td>
               <td><button type="submit" class="btn btn-primary" data-bs-toggle="button" (click)="setMovie(item)">Update</button></td>
-              <td>{{item.movies}}</td>
             </tr>
+          </tbody>
           </table>
       </div>
     <div class = "showEvent" *ngIf="showEvent==true">
@@ -169,12 +169,14 @@
               <th>Birth Year</th>
               <th>Select!</th>
             </tr>
+            <tbody>
             <tr *ngFor="let actor of availableActors" >
               <td>{{actor._id}}</td>
               <td>{{actor.name}}</td>
               <td>{{actor.bYear}}</td>
               <td><button type="submit" data-bs-toggle="button" class="btn btn-primary" (click)="setActor(actor)">Select</button></td>
             </tr>
+          </tbody>
           </table>
     </div>
     <div>
@@ -193,11 +195,11 @@
     <div *ngIf="actorsDB.length>0" class = "shadow p-3 mb-5 bg-white rounded mx-3 mb-3 w-50">
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" [(ngModel)]="fullName">
+          <input disabled type="text" class="form-control" id="name" [(ngModel)]="fullName">
         </div>
         <div class="form-group">
           <label for="bYear">Birth Year</label>
-          <input type="number" class="form-control" id="bYear" [(ngModel)]="bYear">
+          <input disabled type="number" class="form-control" id="bYear" [(ngModel)]="bYear">
         </div>
     </div>
     <div class="input-group">

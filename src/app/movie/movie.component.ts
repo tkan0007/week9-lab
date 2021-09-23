@@ -74,14 +74,6 @@ export class MovieComponent implements OnInit {
 
 
   setMovie(item:any) {
-    if(this.showEvent){
-
-      // initially for clean remained values inside of value
-      console.log("Clean up previous values");
-      //this.enrolledActors.length = 0;
-      //this.availableActors.length = 0;
-    }
-
     if(this.movieId != item.movieId){
       console.log("Apply new change");
 
@@ -92,7 +84,7 @@ export class MovieComponent implements OnInit {
 
       // function to make the list for easily choosing actor
       this.onFindActor(this.movieId);
-      this.setAvailableActor(this.actorsDB,this.enrolledActors);
+      this.setAvailableActor(this.actorsDB, this.enrolledActors);
 
       // show the actor table to choose
       if(!this.showEvent){
@@ -128,14 +120,14 @@ export class MovieComponent implements OnInit {
 // For making the responsive list, but not working after running a time.
   onAddActor(){
     this.dbService.addActorMovie(this.movieId,this.actorId).subscribe((data:any)=>{
-      //this.ngOnInit(); // not sure why I put this here
+      this.ngOnInit();
     })
   }
 
   // find actors from moviesDB, not involving any http request
   onFindActor(movieId:string){
     this.count++;
-    console.log(this.count+" time to call"); // for check
+    //console.log(this.count+" time to call for "+ movieId); // for check
     for(var movie of this.moviesDB){
       if(movie._id == movieId){
         this.enrolledActors = movie.actors;
@@ -143,22 +135,33 @@ export class MovieComponent implements OnInit {
       }
     }
   }
-
-  // make the adaptable list for choosing actor. actors are not showed if already added in actors of movie.
+  // Set adaptive array for Add actor
   setAvailableActor(actorsDB:any[], enrolledActors:any[]){
-    let availableActors = actorsDB;
+    // For test
+    //this.ngOnInit(); // to initialize the DBs
+    //let availableActorsObj = Object.assign({}, {data: actorsDB});
+    // End
+    let aActors = JSON.parse(JSON.stringify(actorsDB));
+    // For test
+    //console.log(aActors);
+    //console.log("Number of actor in DB:" + actorsDB.length);
+    //console.log("Number of actor in DB:" + aActors.length);
+    //console.log("Inside of setAvailableActor")
+    //console.log(aActors);
+    // End
     for(let i = 0;i<enrolledActors.length;i++){ // maybe I can use forEach
-      for(let j = 0; j<availableActors.length;j++){
-        if(enrolledActors[i]._id == availableActors[j]._id){
-          availableActors.splice(j,1);
+      for(let j = 0; j<aActors.length;j++){
+        if(enrolledActors[i]._id == aActors[j]._id){
+          aActors.splice(j,1);
           break;
         }
       }
     }
     //return availableActors;
-    this.availableActors = availableActors;
+    //console.log("After cutting off existed actors in movie");
+    //console.log(aActors);
+    this.availableActors = aActors;
   }
-// end
 
   onDeleteMovie() {
     let obj = {title:this.title};
