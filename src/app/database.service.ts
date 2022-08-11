@@ -31,6 +31,10 @@ export class DatabaseService {
     let url = "/actors/" + id;
     return this.http.delete(url, httpOptions);
   }
+  deleteActorMovie(actorId:string, movieId:string){
+    let url = '/actors/'+ actorId+'/'+movieId;
+    return this.http.put(url,httpOptions)
+  }
 
   // for Movie
   getMovies() {

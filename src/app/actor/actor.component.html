@@ -15,6 +15,9 @@
       <li class="nav-item" style="padding-left:0.2in">
         <a class="btn btn-primary" (click)="changeSection(4)">Delete Actor</a>
       </li>
+      <li class="nav-item" style="padding-left:0.2in">
+        <a class="btn btn-primary" (click)="changeSection(5)">Delete Movie from Actor</a>
+      </li>
     </ul>
 </nav>
 
@@ -90,3 +93,62 @@
       </tr>
     </table>
   </div>
+
+  <!-- Section 5 extra task-->
+  <div class="section" *ngIf="section==5">
+    <table class="table table-striped">
+      <tr>
+        <th>Name</th>
+        <th>Birth Year</th>
+        <th>Select</th>
+      </tr>
+      <tr *ngFor="let item of actorsDB">
+        <td>{{item.name}}</td>
+        <td>{{item.bYear}}</td>
+        <td><button type="submit" class="btn btn-primary" (click)="onSetActor(item)">Select</button></td>
+      </tr>
+    </table>
+    <div class = "showEvent" *ngIf="showEvent==true">
+      <h2>List of Movie</h2>
+      <table class="table table-striped">
+          <tr>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Delete?</th>
+          </tr>
+          <tbody>
+          <tr *ngFor="let movie of availableMovies" >
+            <td>{{movie.title}}</td>
+            <td>{{movie.year}}</td>
+            <td><button type="submit" data-bs-toggle="button" class="btn btn-primary" (click)="setMovie(movie)">Delete</button></td>
+          </tr>
+        </tbody>
+        </table>
+    </div>
+    <div *ngIf="actorsDB.length>0" class = "shadow p-3 mb-5 bg-white rounded mx-3 mb-3 w-50">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input disabled type="text" class="form-control" id="name" [(ngModel)]="fullName">
+      </div>
+      <div class="form-group">
+        <label for="bYear">Birth Year</label>
+        <input disabled type="number" class="form-control" id="bYear" [(ngModel)]="bYear">
+      </div>
+    </div>
+    <!-- *ngIf="moviesDB.length>0" -->
+    <div class = "mx-3 mb-3 w-25">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="title">
+      </div>
+      <div class="form-group">
+        <label for="year">Year</label>
+        <input type="number" class="form-control" id="year" [(ngModel)]="year">
+      </div>
+    </div>
+    <div class="input-group">
+      <button type="submit" class="btn btn-primary" (click)="onExtraTask()">Add movie</button>
+    </div>
+  </div>
+
+
